@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Link } from "react-router-dom"
+
+import { ThemeContext, ThemeContextProps } from '../../context/theme-context';
 
 import { LuLayoutDashboard, LuClipboardList } from 'react-icons/lu';
 import { BiSolidDashboard } from 'react-icons/bi';
 import { HiClipboardList } from 'react-icons/hi';
-
-import { lightTheme } from '../../themes/colors'
 import { StyledList, StyledSidebar, Logo } from "./style";
 
 const routes = [
@@ -20,16 +20,19 @@ interface SidebarProps {
 const Sidebar = ({ setPath }: SidebarProps) => {
     const [selected, setSelected] = useState<number>(0);
 
+    const { getThemeColors } = useContext(ThemeContext) as ThemeContextProps
+    const theme = getThemeColors();
+
     return (
-        <StyledSidebar>
-            <Logo>Hotel Management</Logo>
+        <StyledSidebar appTheme={theme}>
+            <Logo appTheme={theme}>Hotel Management</Logo>
             <ul>
                 {routes.map((route, index) => {
-                    return <StyledList selected={selected === index} key={index} color={selected === index ? lightTheme.greenDark : 'gray'}>
+                    return <StyledList selected={selected === index} key={index} color={selected === index ? theme.greenDark : 'gray'}>
 
                         {React.cloneElement(
                             route.icon[selected === index ? 0 : 1],
-                            { color: selected === index ? lightTheme.greenDark : lightTheme.iconGray }
+                            { color: selected === index ? theme.greenDark : theme.iconGray }
                         )}
 
                         <Link

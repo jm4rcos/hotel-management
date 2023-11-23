@@ -1,3 +1,5 @@
+import { useContext } from "react";
+import { ThemeContextProps, ThemeContext } from "../../../context/theme-context";
 import { StyledText } from "./style";
 
 interface TextProps {
@@ -7,5 +9,8 @@ interface TextProps {
 }
 
 export default function Text({ content, type = 'text', size }: TextProps) {
-    return <StyledText size={size} type={type}>{content}</StyledText>
+    const { getThemeColors } = useContext(ThemeContext) as ThemeContextProps;
+    const theme = getThemeColors()
+
+    return <StyledText appTheme={theme} size={size} type={type}>{content}</StyledText>
 }

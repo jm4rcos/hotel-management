@@ -1,9 +1,7 @@
 import styled from "styled-components";
 
-import { lightTheme } from "../../themes/colors";
-
 export const Container = styled.header`
-    background: ${lightTheme.background};
+    background: transparent;
     width: 100%;
     padding: 10px;
 
@@ -15,6 +13,7 @@ export const Container = styled.header`
 `;
 
 export const ProfileContainer = styled.p`
+    position: relative;
     display: flex;
     gap: 16px;
     align-items: center;

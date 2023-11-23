@@ -1,9 +1,13 @@
 import styled from 'styled-components';
 
-import { lightTheme } from '../../themes/colors';
+import { ThemeColors } from '../../context/theme-context';
 
-export const Container = styled.div`
+interface ThemeProps {
+    appTheme: ThemeColors;
+}
+
+export const Container = styled.div<ThemeProps>`
     height: 100vh;
     width: 100%;
-    background: ${lightTheme.background};
+    background-color: ${({ appTheme }) => appTheme && appTheme.background};
 `

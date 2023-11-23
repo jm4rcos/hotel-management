@@ -1,22 +1,28 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 import Root from './routes/root'
+
 
 import Sidebar from './components/Sidebar'
 import Header from './components/Header'
 
-import { AppContent } from './style'
+import { AppContent, AppContainer } from './style'
+import { ThemeContext, ThemeContextProps } from './context/theme-context';
 
 function App() {
   const [selectedPath, setSelectedPath] = useState<string>('Dashboard');
 
+  const { getThemeColors } = useContext(ThemeContext) as ThemeContextProps;
+
+  const theme = getThemeColors()
+
   return (
-    <div style={{ display: 'flex', height: '100vh', width: '100%' }}>
+    <AppContainer>
       <Sidebar setPath={setSelectedPath} />
-      <AppContent>
+      <AppContent appTheme={theme}>
         <Header title={selectedPath} />
         <Root />
       </AppContent>
-    </div>
+    </AppContainer>
   )
 }
 

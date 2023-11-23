@@ -1,3 +1,6 @@
+import { useContext } from 'react';
+import { ThemeContextProps, ThemeContext } from "../../context/theme-context";
+
 import Calendar from "../../components/Calendar";
 import Table from "../../components/Table";
 import Button from "../../components/ui/Button";
@@ -10,7 +13,10 @@ const fakeData = [
 ];
 
 const FrontDesk = () => {
-    return <Container>
+    const { getThemeColors } = useContext(ThemeContext) as ThemeContextProps;
+    const theme = getThemeColors()
+
+    return <Container appTheme={theme}>
         <div className="button-container">
             <Button label="Add New Guest" />
         </div>

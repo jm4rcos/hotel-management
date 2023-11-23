@@ -39,7 +39,7 @@ export default function Calendar() {
                     onClick={() => handleDayClick(dayToShow)}
                 >
                     <p className='date'>{daysOfWeek[i]}</p>
-                    <p className='main-date'>{dayNumber === currentDay ? currentDay : dayToShow}</p>
+                    <p className='main-date'>{dayNumber === currentDay ? currentDay - 1 : dayToShow - 1}</p>
                 </Day>
             );
         }
