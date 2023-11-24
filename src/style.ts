@@ -1,12 +1,8 @@
 import styled from "styled-components";
 
-import { ThemeColors } from "./context/theme-context";
+import { ThemeProps } from "./context/theme-context";
 
-interface AppContentProps {
-    appTheme: ThemeColors;
-}
-
-export const AppContent = styled.div<AppContentProps>`
+export const AppContent = styled.div<ThemeProps>`
     width: 100%;
     height: 100vh;
     padding: 16px;

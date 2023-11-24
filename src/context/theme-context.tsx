@@ -8,6 +8,10 @@ export interface ThemeContextProps {
     getThemeColors: () => ThemeColors;
 }
 
+export interface ThemeProps {
+    appTheme: ThemeColors;
+}
+
 export interface ThemeColors {
     [key: string]: string;
 };

@@ -1,10 +1,16 @@
-import styled, { css } from 'styled-components';
+import styled, { css, keyframes } from 'styled-components';
 import { lightTheme } from '../../../themes/colors';
 
 
 interface ButtonProps {
-    animation: Boolean;
+    animation?: boolean;
 }
+
+const bounceAnimation = keyframes`
+    0% { transform: scale(1) }
+    50% { transform: scale(0.8) }
+    100% { transform: scale(1) }
+`;
 
 export const Container = styled.button<ButtonProps>`
     background-color: ${lightTheme.blueLight};
@@ -21,11 +27,7 @@ export const Container = styled.button<ButtonProps>`
     transition: background-color 0.3s ease-in-out;
 
     ${({ animation }) => animation && css`
-        @keyframes AnimateButton {
-            0% { transform: scale(1) }
-            50% { transform: scale(0.8) }
-            100% { transform: scale(1) }
-        }
+        animation: ${bounceAnimation} 0.3s;
     `}
 
     &:hover {

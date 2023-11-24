@@ -3,7 +3,7 @@ import { ThemeContextProps, ThemeContext } from "../../../context/theme-context"
 import { StyledText } from "./style";
 
 interface TextProps {
-    content: string;
+    content: string | undefined;
     type: 'text' | "title";
     size?: number;
 }

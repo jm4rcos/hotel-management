@@ -1,13 +1,16 @@
-import { useState } from 'react';
+import { useContext, useState } from 'react';
 
 import Text from '../ui/Text';
 
 import { IoCalendarOutline } from "react-icons/io5";
 
 import { CalendarContainer, Day, DayContainer, Label } from './style';
-import { lightTheme } from '../../themes/colors';
+import { ThemeContextProps, ThemeContext } from '../../context/theme-context';
 
 export default function Calendar() {
+    const { getThemeColors, theme: themeName } = useContext(ThemeContext) as ThemeContextProps;
+    const theme = getThemeColors();
+
     const [selectedDay, setSelectedDay] = useState<number | null>(null);
 
     const daysOfWeek = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
@@ -37,6 +40,8 @@ export default function Calendar() {
                     today={currentDayOfWeek === daysOfWeek[i] ? 'true' : 'false'}
                     selected={dayNumber === selectedDay}
                     onClick={() => handleDayClick(dayToShow)}
+                    appTheme={theme}
+                    themeName={themeName}
                 >
                     <p className='date'>{daysOfWeek[i]}</p>
                     <p className='main-date'>{dayNumber === currentDay ? currentDay - 1 : dayToShow - 1}</p>
@@ -49,9 +54,9 @@ export default function Calendar() {
 
 
     return (
-        <CalendarContainer>
+        <CalendarContainer appTheme={theme} themeName={themeName}>
             <Label>
-                <IoCalendarOutline size={20} color={lightTheme.title} />
+                <IoCalendarOutline size={20} color={theme.title} />
                 <Text type='title' content={`${selectedDay !== null ? selectedDay : currentDay} ${currentMonth}, ${currentDayOfWeek}`} />
             </Label>
             <DayContainer>

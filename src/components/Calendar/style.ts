@@ -1,17 +1,22 @@
-import styled, { css } from 'styled-components';
-import { lightTheme } from '../../themes/colors';
+import styled from 'styled-components';
+import { ThemeColors } from '../../context/theme-context';
 
 interface DayProps {
-  selected: boolean;
-  today: string;
+  selected?: boolean;
+  today?: string;
+  appTheme: ThemeColors
+  themeName: string
 }
 
-export const CalendarContainer = styled.div`
+export const CalendarContainer = styled.div<DayProps>`
     width: 100%;
     padding: 16px;
     display: flex;
     flex-direction: column;
     gap: 16px;
+    border-radius: 14px;
+
+    ${({ themeName, appTheme }) => themeName === 'light' && `background-color: ${appTheme.gray100};`};
 `;
 
 export const Day = styled.div<DayProps>`
@@ -25,13 +30,13 @@ export const Day = styled.div<DayProps>`
   position: relative;
 
   .date {
-    color: ${({ selected }) => (selected) && lightTheme.blueDark};    
+    color: ${({ selected, appTheme }) => (selected) && appTheme.blueDark};    
   }
 
   .main-date {
-    background-color: ${({ today }) => today === 'true' ? lightTheme.blueLight : 'transparent'};
-    ${({ today }) => today === 'true' && css`color: ${lightTheme.blueDark};`}
-    ${({ selected }) => selected && css`color: ${lightTheme.blueDark};`}
+    background-color: ${({ today, appTheme }) => today === 'true' ? appTheme.blueLight : 'transparent'};
+    ${({ today, appTheme }) => today === 'true' && `color: ${appTheme.blueDark};`}
+    ${({ selected, appTheme }) => selected && `color: ${appTheme.blueDark};`}
     height: 40px;
     width: 40px;
     border-radius: 50%;
